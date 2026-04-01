@@ -6,6 +6,6 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/get/all", controller.getAll);
-// router.post("/post", controller.post);
+router.post("/post/create_user", controller.createUser);
 
 module.exports = router;

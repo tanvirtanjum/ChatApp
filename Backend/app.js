@@ -14,11 +14,11 @@ app.set('trust proxy', 1);
 app.use(cors({origin : '*'}));
 
 // <-- Import Routes -->
-const Users = require("./routes/user.route");
+const users = require("./routes/user.route");
 
 
 // <-- Configure Routes -->
-app.use('/api/users', Users);
+app.use('/api/users', users);
 
 // <-- -->
 app.listen(process.env.SERVER_PORT, () => {

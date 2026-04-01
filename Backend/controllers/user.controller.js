@@ -19,15 +19,15 @@ exports.getAll = (req, res, next) => {
     });
 };
 
-// exports.post = (req, res, next) => {
-//     const data = req.body;
+exports.createUser = (req, res, next) => {
+    const data = req.body;
 
-//     service.post(data, (error, results) => {
-//         if (error) {
-//             console.log(error);
-//             return res.status(400).send({ success: false, data: "Bad Request. {{--> "+error+" <--}}" });
-//         } else {
-//             return res.status(200).send(results);
-//         }
-//     });
-// };
+    service.createUser(data, (error, results) => {
+        if (error) {
+            console.log(error);
+            return res.status(400).send({ success: false, data: "Bad Request. {{--> "+error+" <--}}" });
+        } else {
+            return res.status(201).send(results);
+        }
+    });
+};
