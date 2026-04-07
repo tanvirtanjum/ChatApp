@@ -15,10 +15,12 @@ app.use(cors({origin : '*'}));
 
 // <-- Import Routes -->
 const users = require("./routes/user.route");
+const profiles = require("./routes/profile.route");
 
 
 // <-- Configure Routes -->
 app.use('/api/users', users);
+app.use('/api/profiles', profiles);
 
 // <-- -->
 app.listen(process.env.SERVER_PORT, () => {

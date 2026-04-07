@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" ng-app="app">
+<head ng-controller="title.controller">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatApp</title>
+    <title>{{GenerateTitle()}}</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./assets/bootstrap-5.3.8-dist/css/bootstrap.min.css" crossorigin="anonymous">
@@ -13,7 +13,22 @@
     <link rel="stylesheet" href="./assets/fontawesome-free-7.2.0-web/css/all.css" crossorigin="anonymous">
 
     <!-- AngularJS -->
-    <script src="./assets/angularjs-1.8.2/script.js" crossorigin="anonymous"></script>
+    <script src="./assets/angularjs/angular.js" crossorigin="anonymous"></script>
+    <!-- Angular Route 1.8.3 -->
+    <script src="./assets/angularjs/angular-route.js"></script>
+    <script src="./assets/angularjs/angular-cookies.js"></script>
+    <script src="./assets/angularjs/ng-file-upload.js"></script>
+    <script src="./assets/angularjs/ng-file-upload-shim.js"></script>
+
+    <!-- App Controller -->
+    <script src="./controllers/app.js" crossorigin="anonymous"></script>
+
+    <!-- Title Controller -->
+    <script src="./controllers/title.controller.js" crossorigin="anonymous"></script>
+
+    <!-- Landing Controller -->
+    <script src="./controllers/landing.controller.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
@@ -27,31 +42,74 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-outline-success me-2" type="submit">Search</button>
+                <button class="btn btn-primary me-2" 
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                    Sign Up
+                </button>
+                <button class="btn btn-success me-2" 
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Sign In
+                </button>
                 <div class="btn-group dropstart">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropstart
+                    <button type="button" 
+                            class="btn btn-warning dropdown-toggle" 
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        <i class="fa-solid fa-user-gear"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Menu item</a></li>
-                        <li><a class="dropdown-item" href="#">Menu item</a></li>
-                        <li><a class="dropdown-item" href="#">Menu item</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i>&nbsp;Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         </nav>
+
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content" style="background-color: #edf2f5;">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert" ng-class="LinkControlls.SignIn.LoginMessage.Class" role="alert" ng-hide="LinkControlls.SignIn.LoginMessage.Hide" align="center">
+                            {{LinkControlls.SignIn.LoginMessage.Message}}
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control form-control-sm" id="UserName" ng-model="UserName" placeholder="XYZ">
+                            <label for="UserName">Username</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control form-control-sm" id="Password" ng-model="Password" placeholder="Password">
+                            <label for="Password">Password</label>
+                        </div>
+                        <div class="d-flex justify-content-around" style="width: 100%;" id="LoginBTN" ng-model="LoginBTN" ng-click="LoginBTNClicked()">
+                            <button type="button" class="btn btn-sm btn-primary" style="width: 70%;">Sign In</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#signupModal">
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
 
-    <main>
-        <div class="container mt-4">
-            <h1>Welcome to ChatApp</h1>
-            <p>This is a simple chat application built with Bootstrap and Font Awesome.</p>
-        </div>
+    <main class="container-fluid" style="height: 81.5%; overflow-y: hidden;" ng-view>
+        
     </main>
 
     <footer class="bg-dark text-light text-center py-3 mt-4 fixed-bottom">
-        <p>&copy; 2024 ChatApp. All rights reserved.</p>
+        <p>&copy; 2026 ChatApp. All rights reserved.</p>
     </footer>
 </body>
 </html>
